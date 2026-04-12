@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hand Raise Detector</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="data:,">
+  </head>
+  <body>
+    <div class="page">
+      <div class="glow glow-left"></div>
+      <div class="glow glow-right"></div>
+
+      <main class="layout">
+        <section class="panel hero">
+          <p class="eyebrow">Standalone Demo</p>
+          <h1>Upload an image and detect how many people have raised their hand - Barath T</h1>
+          <p class="copy">
+            This app uses a lightweight MediaPipe pose model to detect multiple people,
+            mark each person as hand raised or not raised, and calculate percentages.
+          </p>
+
+          <div class="upload-row">
+            <label class="upload-button">
+              <input id="imageInput" type="file" accept="image/*" />
+              Choose Image
+            </label>
+            <span id="statusPill" class="status-pill">Loading model...</span>
+          </div>
+
+          <div id="errorBox" class="error-box hidden"></div>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <span>Total People</span>
+              <strong id="totalPeople">0</strong>
+            </article>
+            <article class="metric-card accent">
+              <span>Hands Raised</span>
+              <strong id="raisedPeople">0</strong>
+            </article>
+            <article class="metric-card">
+              <span>Not Raised</span>
+              <strong id="notRaisedPeople">0</strong>
+            </article>
+          </div>
+
+          <div class="percentage-panel">
+            <div>
+              <div class="percentage-label">
+                <span>Raised</span>
+                <strong id="raisedPercent">0%</strong>
+              </div>
+              <div class="progress-track">
+                <div id="raisedBar" class="progress-fill raised"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="percentage-label">
+                <span>Not Raised</span>
+                <strong id="notRaisedPercent">0%</strong>
+              </div>
+              <div class="progress-track">
+                <div id="notRaisedBar" class="progress-fill not-raised"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tips-panel">
+            <p>Best results:</p>
+            <ul>
+              <li>Use photos where shoulders, elbows, and wrists are visible.</li>
+              <li>One raised hand on either side counts as raised.</li>
+              <li>Dense crowds and heavy occlusion can reduce accuracy.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="panel preview-panel">
+          <div class="preview-frame">
+            <img id="previewImage" class="preview-image hidden" alt="Uploaded preview" />
+            <canvas id="overlayCanvas" class="preview-overlay hidden"></canvas>
+
+            <div id="emptyPreview" class="empty-preview">
+              <div class="empty-preview-shape"></div>
+              <p>Your annotated image will appear here.</p>
+            </div>
+          </div>
+
+          <div class="result-panel">
+            <h2>Per-person results</h2>
+            <div id="resultList" class="result-list">
+              <p class="empty-results">Upload an image to see who raised a hand and who did not.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
